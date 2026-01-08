@@ -29,11 +29,12 @@ https://www.kaggle.com/datasets/huanghanchina/pascal-voc-2012
 After extraction, the dataset should be placed as:
 
 VOCdevkit/
-├──VOC2012/
-    └──JPEGImages/
-    ├── Annotations/
+└── VOC2012/
+    ├── JPEGImages/        # All input images (.jpg)
+    ├── Annotations/       # XML annotation files (bounding boxes)
     ├── ImageSets/
-    │       └── Main/
+    │   └── Main/          # train.txt, val.txt, trainval.txt
+
 
 
 ---
