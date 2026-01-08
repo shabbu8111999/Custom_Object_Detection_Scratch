@@ -1,25 +1,41 @@
 import os
-import urllib.request
 import tarfile
+import urllib.request
 
 
 def download_and_extract_voc():
-    try:
-        url = "http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar"
-        save_path = "VOCtrainval_06-Nov-2007.tar"
+    url = "https://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar"
+    tar_path = "VOCtrainval_06-Nov-2007.tar"
+    extract_path = "VOC2007"
 
-        if not os.path.exists(save_path):
-            print(f"Downloading PASCAL VOC 2007 dataset...")
-            urllib.request.urlretrieve(url, save_path)
+    try:
+        print("Downloading PASCAL VOC 2007 dataset...")
+
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
+
+        request = urllib.request.Request(url, headers=headers)
+
+        with urllib.request.urlopen(request) as response, open(tar_path, "wb") as out_file:
+            out_file.write(response.read())
+
+        size_mb = os.path.getsize(tar_path) / (1024 * 1024)
+        print(f"Downloaded file size: {size_mb:.2f} MB")
+
+        if size_mb < 400:
+            raise ValueError("Download incomplete or blocked.")
 
         print("Extracting dataset...")
-        with tarfile.open(save_path) as tar:
-            tar.extractall()
+        with tarfile.open(tar_path, "r") as tar:
+            tar.extractall(path=extract_path)
 
         print("Dataset downloaded and extracted successfully.")
 
     except Exception as e:
-        print("Error While downlaoding the dataset:", e)
+        print("Error occurred:")
+        print(e)
+
 
 if __name__ == "__main__":
     download_and_extract_voc()
