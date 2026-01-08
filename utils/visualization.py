@@ -57,3 +57,29 @@ def show_image(image, title="Image"):
 
     except Exception as e:
         print("Error showing image:", e)
+
+def draw_detection(image, bbox, label, score=None):
+    try:
+        x1, y1, x2, y2 = map(int, bbox)
+
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+        text = CLASSES[label]
+        if score is not None:
+            text += f" ({score:.2f})"
+
+        cv2.putText(
+            image,
+            text,
+            (x1, y1 - 5),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (255, 0, 0),
+            1
+        )
+
+        return image
+
+    except Exception as e:
+        print("Draw error:", e)
+        return image
