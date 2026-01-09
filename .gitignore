@@ -217,3 +217,5 @@ VOC2012/
 *.avi
 *.gif
 *.pth
+
+!Demo video of output.mp4
