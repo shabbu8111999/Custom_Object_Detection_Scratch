@@ -1,4 +1,4 @@
-# Assignment 1 – Custom Object Detection (PASCAL VOC 2012)
+# Custom Object Detection (PASCAL VOC 2012)
 
 ## Overview
 This project implements a custom object detection pipeline trained entirely
